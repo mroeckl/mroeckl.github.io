@@ -1,7 +1,5 @@
 import React from "react";
 const gatsby = jest.requireActual("gatsby");
-import config from "../../gatsby-config";
-import type { IPluginRefObject } from "gatsby";
 
 jest.mock("theme-ui", () => {
   const originalModule = jest.requireActual("theme-ui");
@@ -11,11 +9,6 @@ jest.mock("theme-ui", () => {
     useColorMode: jest.fn(() => "light"),
   };
 });
-
-const THEME_ID = "@lekoarts/gatsby-theme-minimal-blog";
-const themePlugin = config?.plugins?.find(
-  (plugin): plugin is IPluginRefObject => typeof plugin !== `string` && plugin.resolve === THEME_ID
-);
 
 module.exports = {
   ...gatsby,
@@ -36,8 +29,32 @@ module.exports = {
   ),
   useStaticQuery: jest.fn().mockImplementation(() => {
     return {
-      site: { siteMetadata: config.siteMetadata },
-      minimalBlogConfig: themePlugin?.options,
+      site: {
+        siteMetadata: {
+          siteTitle: `test-title`,
+          siteTitleAlt: `test-titlealt`,
+          siteHeadline: `test-headline`,
+          siteUrl: `test-url`,
+          siteDescription: `test-description`,
+          siteImage: `test-image`,
+          siteLanguage: `en`,
+          author: `test-author`,
+        },
+      },
+      minimalBlogConfig: {
+        navigation: [
+          {
+            title: `test-nav-title`,
+            slug: `test-nav-slug`,
+          },
+        ],
+        externalLinks: [
+          {
+            name: `test-link-name`,
+            url: `test-link-url`,
+          },
+        ],
+      },
     };
   }),
 };
