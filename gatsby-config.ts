@@ -11,7 +11,7 @@ const config: GatsbyConfig = {
     siteTitle: `Let's make it!`,
     siteTitleAlt: `Let's make it!`,
     siteHeadline: `Let's make it!`,
-    siteUrl: `https://techblog.roeckls.de`,
+    siteUrl: `https://letsmakeit.roeckls.de`,
     siteDescription: `Technical write-ups on software development, agile way of working, ethical hacking, smart home, 3D printing, CNC drilling, sustainability and many more.`,
     siteImage: `/banner.jpg`,
     siteLanguage: `en`,
