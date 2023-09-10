@@ -10,10 +10,6 @@ tags:
 
 ![Dynamische Strompreise](./nimisha-mekala-fchVIvuMGBI-unsplash.jpg)
 
-import PricesPerMonthChart from "./PricesPerMonthChart";
-import PricesPerDayChart from "./PricesPerDayChart";
-import PricesPerWeekdayChart from "./PricesPerWeekdayChart";
-import PricesPerHourChart from "./PricesPerHourChart";
 import rawPriceData2023 from "./electricity-prices_DE_2023.json";
 
 export const KWH_PER_MWH = 1000;
@@ -50,7 +46,7 @@ Der durchschnittliche Strompreis lag im Juli bei:
 Damit war im diesjährigen Vergleich der Juli der Monat mit den durchschnittlich günstigsten Preisen, wie man im nachfolgenden Diagramm, das die Durschnittspreise pro Monat in 2023 darstellt, erkennen kann:
 
 <figure>
-  <PricesPerMonthChart data={priceData2023} />
+  <PricesPerMonthChart data={priceData2023} months={[0, 1, 2, 3, 4, 5, 6]} />
   <figcaption>Durchschnittlicher Nettostrompreis pro Monat 2023</figcaption>
 </figure>
 
