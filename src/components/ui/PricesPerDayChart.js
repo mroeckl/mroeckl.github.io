@@ -27,6 +27,7 @@ function getAvgPricePerDay(pricesThisMonth) {
     .map((x, i) => i + 1);
   const avgPricesPerDay = days.map((day) => {
     const priceDataOfThisDay = pricesThisMonth.filter((item) => new Date(item.x).getDate() === day);
+    if (priceDataOfThisDay.length === 0) return { x: day, y: 0 };
     const sum = priceDataOfThisDay.reduce((accumulator, curr) => accumulator + curr.y, 0);
     return { x: priceDataOfThisDay[0].x, y: sum / priceDataOfThisDay.length };
   });
@@ -35,7 +36,7 @@ function getAvgPricePerDay(pricesThisMonth) {
 
 const PricesPerDayChart = ({ data }) => {
   return (
-    <div style={{ height: 400 }}>
+    <div style={{ height: 400 }} data-testid="PricesPerDayChart">
       <ResponsiveLine
         data={getLineChartData(data)}
         margin={{ top: 20, right: 50, bottom: 50, left: 80 }}

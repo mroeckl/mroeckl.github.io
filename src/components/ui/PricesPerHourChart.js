@@ -23,7 +23,7 @@ const PricesPerHourChart = ({ data }) => {
     return min < v.averagePrice ? min : v.averagePrice;
   });
   return (
-    <div style={{ height: 400 }}>
+    <div style={{ height: 400 }} data-testid="PricesPerHourChart">
       <ResponsiveBar
         data={avgPricesPerHour}
         indexBy="hour"

@@ -8,7 +8,7 @@ const PricesPerMonthChart = ({ data, months }) => {
     return { month: month, averagePrice: sum / priceDataOfThisMonth.length };
   });
   return (
-    <div style={{ height: 400 }}>
+    <div style={{ height: 400 }} data-testid="PricesPerMonthChart">
       <ResponsiveBar
         data={avgPricesPerMonth}
         indexBy="month"

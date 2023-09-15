@@ -29,7 +29,7 @@ const PricesPerWeekdayChart = ({ data }) => {
   });
 
   return (
-    <div style={{ height: 400 }}>
+    <div style={{ height: 400 }} data-testid="PricesPerWeekdayChart">
       <ResponsiveBar
         data={avgPricesPerWeekday}
         indexBy="weekday"
