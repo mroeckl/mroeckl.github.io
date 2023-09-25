@@ -5,8 +5,6 @@ import PricesPerMonthChart from "../../../components/ui/PricesPerMonthChart";
 import PricesPerWeekdayChart from "../../../components/ui/PricesPerWeekdayChart";
 import { Message } from "theme-ui";
 
-console.log("Test2");
-
 export default {
   ...MdxComponents,
   Message,

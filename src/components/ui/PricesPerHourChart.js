@@ -2,7 +2,7 @@ import React from "react";
 import { ResponsiveBar } from "@nivo/bar";
 
 const PricesPerHourChart = ({ data }) => {
-  const hours = Array(23)
+  const hours = Array(24)
     .fill()
     .map((x, i) => i);
   const avgPricesPerHour = hours.map((hour) => {
