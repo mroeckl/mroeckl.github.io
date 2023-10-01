@@ -4,7 +4,7 @@ import PricesPerDayChart from "./PricesPerDayChart";
 import { resize } from "../../../tests/ResizeObserverTestSupport";
 
 const testData = [];
-for (let i = 0; i < 31; i++) {
+for (let i = 0; i < 29; i++) {
   testData.push({
     dateTime: new Date(2023, 0, 1 + i, 1, 0),
     price: i + 1,

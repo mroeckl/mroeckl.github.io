@@ -25,12 +25,14 @@ function getAvgPricePerDay(pricesThisMonth) {
   const days = Array(31)
     .fill()
     .map((x, i) => i + 1);
-  const avgPricesPerDay = days.map((day) => {
-    const priceDataOfThisDay = pricesThisMonth.filter((item) => new Date(item.x).getDate() === day);
-    if (priceDataOfThisDay.length === 0) return { x: day, y: 0 };
-    const sum = priceDataOfThisDay.reduce((accumulator, curr) => accumulator + curr.y, 0);
-    return { x: priceDataOfThisDay[0].x, y: sum / priceDataOfThisDay.length };
-  });
+  const avgPricesPerDay = days
+    .map((day) => {
+      const priceDataOfThisDay = pricesThisMonth.filter((item) => new Date(item.x).getDate() === day);
+      if (priceDataOfThisDay.length === 0) return undefined;
+      const sum = priceDataOfThisDay.reduce((accumulator, curr) => accumulator + curr.y, 0);
+      return { x: priceDataOfThisDay[0].x, y: sum / priceDataOfThisDay.length };
+    })
+    .filter((item) => item !== undefined);
   return avgPricesPerDay;
 }
 
