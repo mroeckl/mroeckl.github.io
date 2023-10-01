@@ -1,0 +1,114 @@
+---
+title: Strompreise im September'23
+date: 2023-10-01
+description: Auswertung der Börsenstrompreise von September 2023
+banner: ./nimisha-mekala-fchVIvuMGBI-unsplash.jpg
+tags:
+  - Strompreis
+  - Tibber
+---
+
+![Dynamische Strompreise](./nimisha-mekala-fchVIvuMGBI-unsplash.jpg)
+
+import rawPriceData2023 from "./electricity-prices_DE_2023.json";
+
+export const KWH_PER_MWH = 1000;
+export const CT_PER_EURO = 100;
+export const priceData2023 = rawPriceData2023.map((item) => {
+  item.price /= KWH_PER_MWH / CT_PER_EURO;
+  return item;
+});
+
+export const AUGUST = 7;
+export const SEPTEMBER = 8;
+export const SUNDAY = 0;
+export const TUESDAY = 2;
+export const priceDataAug23 = priceData2023.filter((item) => new Date(item.dateTime).getMonth() === AUGUST);
+export const meanAug = priceDataAug23.reduce((total, next) => total + next.price, 0) / priceDataAug23.length;
+export const priceDataSep23 = priceData2023.filter((item) => new Date(item.dateTime).getMonth() === SEPTEMBER);
+export const mean = priceDataSep23.reduce((total, next) => total + next.price, 0) / priceDataSep23.length;
+
+Dieser Blogpost gibt euch einen Überblick über die Nettobörsenstrompreise im September'23.
+Allgemeine Infos findet ihr im Post: [Strompreise im Juli'23](./strompreise-im-juli-23).
+
+Der durchschnittliche Strompreis lag im September bei:
+
+<p style={{ textAlign: "center" }}>
+  <b>&#216; {mean.toFixed(1)} ct/kWh</b>
+</p>
+
+Damit lag der September im diesjährigen Vergleich in etwa im Mittel:
+
+<figure>
+  <PricesPerMonthChart data={priceData2023} months={[0, 1, 2, 3, 4, 5, 6, 7, 8]} />
+  <figcaption>Durchschnittlicher Nettostrompreis pro Monat 2023</figcaption>
+</figure>
+
+Die Preisschwankungen im September waren ähnlich wie im August.
+Jedoch gab es einen kurzzeitigen, krätigen Ausschlag nach oben.
+Am 11. September lag der Spitzenstrompreis bei {Math.max(...priceData2023.map((o) => o.price)).toFixed(1)} ct/kWh, dem höchsten Wert seit Jahresanfang.
+
+Der niedrigste Preis lag bei {Math.min(...priceDataAug23.map((o) => o.price)).toFixed(1)} ct/kWh.
+Insgesamt gab es im September, wie schon im August, an {priceDataSep23.filter((item) => item.price<0).length} Stunden negative Nettostrompreise.
+Das sind {(priceDataSep23.filter((item) => item.price<0).length/24.0/30.0).toFixed(2)}% der Gesamtstunden.
+{priceDataSep23.filter((item) => item.price<0 && new Date(item.dateTime).getHours() >= 12 && new Date(item.dateTime).getHours() <= 15).length} der {priceDataSep23.filter((item) => item.price<0).length} Stunden mit negativen Preisen lagen zwischen 12 und 15 Uhr.
+
+<figure>
+  <PricesPerDayChart data={priceDataSep23} />
+  <figcaption>Nettostrompreise im September 2023</figcaption>
+</figure>
+
+export const sundayPriceData = priceDataSep23.filter((item) => new Date(item.dateTime).getDay() === SUNDAY);
+
+Wie bereits im August war der durchschnittliche Strompreis an Sonntagen mit {(sundayPriceData.reduce((total, next) => total + next.price, 0) / sundayPriceData.length).toFixed(1)} ct/kWh deutlich geringer als an allen anderen Wochentagen.
+Daher war es wieder vorteilhaft, Verbraucher, die man nicht täglich benötigt, wie das Laden eines E-Autos oder das Wäschewaschen auf Sonntage zu verschieben.
+
+<p style={{ textAlign: "center", border: "2px solid lightblue" }}>
+  <b>Tipp: Sonntags Waschen</b>
+</p>
+
+<figure>
+  <PricesPerWeekdayChart data={priceDataSep23} />
+  <figcaption>Nettostrompreise im September in Wochentage gruppiert</figcaption>
+</figure>
+
+export const sevenPmPriceData = priceDataSep23.filter((item) => new Date(item.dateTime).getHours() === 19);
+
+Da die Tage im September spürbar kürzer werden, genauer gesagt die Sonne früher untergeht, muss mit einem geringeren Ertrag aus Photovoltaik in den Abendstunden gerechnet werden.
+Gleichzeitig steigt die Last, da bereits zu einer früheren Tageszeit Lampen eingeschaltet und vielleicht auch schon die ersten elektrisch betriebenen Heizungen benötigt werden.
+Die höhere Last und geringerer Ertrag günstiger Photovoltaikenergie in den früheren Abendstunden führt dazu, dass immer öfter teurere konventionelle Energien herangezogen werden müssen und der Strompreis demzufolge steigt.
+Je kürzer die Tage desto früher muss mit teureren Preisen gerechnet werden.
+War die teuerste Tageszeit im August noch zwischen 20 und 21 Uhr, ist sie im September schon eine Stunde früher von 19 bis 20 Uhr.
+Zu dieser Zeit betrug der Strompreis im Durchschnitt {(sevenPmPriceData.reduce((total, next) => total + next.price, 0) / sevenPmPriceData.length).toFixed(1)} ct/kWh.
+
+Nachfolgend sind die Nettostrompreise je Tageszeit im August und September zum direkten Vergleich dargestellt:
+
+<figure>
+  <PricesPerHourChart data={priceDataAug23} />
+  <figcaption>Nettostrompreise im August in Tageszeit gruppiert</figcaption>
+</figure>
+
+<figure>
+  <PricesPerHourChart data={priceDataSep23} />
+  <figcaption>Nettostrompreise im September in Tageszeit gruppiert</figcaption>
+</figure>
+
+export const onePmPriceData = priceDataSep23.filter((item) => new Date(item.dateTime).getHours() === 13);
+
+Die durchschnittlich günstigste Tageszeit war ebenfalls eine Stunde früher zu finden, zwischen 13 und 14 Uhr.
+In dieser Stunde lag der durchschnittliche Nettostrompreis bei nur {(onePmPriceData.reduce((total, next) => total + next.price, 0) / onePmPriceData.length).toFixed(1)} ct/kWh.
+
+<p style={{ textAlign: "center", border: "2px solid lightblue" }}>
+  <b>Tipp: 13 Uhr Spülmaschine einschalten</b>
+</p>
+
+Im Oktober werden wir sehen, ob sich die Muster weiter verschieben.
+
+---
+
+Links:
+
+- Foto von [Nimisha Mekala](https://unsplash.com/de/@nimisha_mekala?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) auf [Unsplash](https://unsplash.com/de/fotos/fchVIvuMGBI?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+- Nettostrompreise von ENTSO-E über folgendes Projekt bezogen: [github:mroeckl/electricity-prices](https://github.com/mroeckl/electricity-prices)
+- Wer wissen möchte, wie dieser Beitrag im Sourcecode aussieht, kann dies hier einsehen: [github:mroeckl/mroeckl.github.io](https://github.com/mroeckl/mroeckl.github.io/tree/master/content/posts/2023/08/30)
+- Du möchstest zu Tibber wechseln, dann nutze doch meinen Einladungslink und erhalte 50€: [https://invite.tibber.com/q9rztnrz](https://invite.tibber.com/q9rztnrz)
