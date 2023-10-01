@@ -4,10 +4,10 @@ import PricesPerMonthChart from "./PricesPerMonthChart";
 import { resize } from "../../../tests/ResizeObserverTestSupport";
 
 const testData = [
-  { dateTime: "2023-01-01T02:00:00Z", price: 1 },
-  { dateTime: "2023-01-01T02:00:00Z", price: 2 },
-  { dateTime: "2023-02-01T02:00:00Z", price: 3 },
-  { dateTime: "2023-02-01T02:00:00Z", price: 4 },
+  { dateTime: "2023-01-01T02:00:00Z", price: 3 },
+  { dateTime: "2023-01-01T02:00:00Z", price: 4 },
+  { dateTime: "2023-02-01T02:00:00Z", price: 1 },
+  { dateTime: "2023-02-01T02:00:00Z", price: 2 },
   { dateTime: "2023-03-01T02:00:00Z", price: 5 },
   { dateTime: "2023-03-01T02:00:00Z", price: 6 },
 ];

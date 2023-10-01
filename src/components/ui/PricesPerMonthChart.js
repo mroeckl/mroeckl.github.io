@@ -13,12 +13,12 @@ const PricesPerMonthChart = ({ data, months }) => {
   }
 
   const maxAvgPrice = avgPricesPerMonth.reduce(function (max, v) {
-    return max.avgPrice > v.avgPrice ? max.avgPrice : v.avgPrice;
-  });
+    return max.avgPrice > v.avgPrice ? max : v;
+  }).avgPrice;
 
   const minAvgPrice = avgPricesPerMonth.reduce(function (min, v) {
-    return min.avgPrice < v.avgPrice ? min.avgPrice : v.avgPrice;
-  });
+    return min.avgPrice < v.avgPrice ? min : v;
+  }).avgPrice;
 
   return (
     <div style={{ height: 400 }} data-testid="PricesPerMonthChart">

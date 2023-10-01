@@ -7,7 +7,7 @@ const PricesPerWeekdayChart = ({ data }) => {
   const avgPricesPerWeekday = weekdays.map((weekday) => {
     const priceDataOfThisWeekday = data.filter((item) => new Date(item.dateTime).getDay() === weekday);
     const sum = priceDataOfThisWeekday.reduce((accumulator, curr) => accumulator + curr.price, 0);
-    return { weekday: weekday, averagePrice: sum / priceDataOfThisWeekday.length };
+    return { weekday: weekday, avgPrice: sum / priceDataOfThisWeekday.length };
   });
 
   function getAnyDateForThisWeekday(weekday) {
@@ -21,19 +21,19 @@ const PricesPerWeekdayChart = ({ data }) => {
   }
 
   const maxPricePerWeekday = avgPricesPerWeekday.reduce(function (max, v) {
-    return max > v.averagePrice ? max : v.averagePrice;
-  });
+    return max.avgPrice > v.avgPrice ? max : v;
+  }).avgPrice;
 
   const minPricePerWeekday = avgPricesPerWeekday.reduce(function (min, v) {
-    return min < v.averagePrice ? min : v.averagePrice;
-  });
+    return min.avgPrice < v.avgPrice ? min : v;
+  }).avgPrice;
 
   return (
     <div style={{ height: 400 }} data-testid="PricesPerWeekdayChart">
       <ResponsiveBar
         data={avgPricesPerWeekday}
         indexBy="weekday"
-        keys={["averagePrice"]}
+        keys={["avgPrice"]}
         valueFormat={(value) => `${Number(value).toFixed(1)} ct/kWh`}
         colors={(d) => `hsl(${(1 - calcRelativeValue(d.value)) * 120}, 100%, 70%)`}
         axisLeft={{
