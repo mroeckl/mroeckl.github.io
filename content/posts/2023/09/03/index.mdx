@@ -39,19 +39,17 @@ Der durchschnittliche Strompreis lag im August bei:
 
 Damit war im diesjährigen Vergleich der August nach Mai und Juli der drittgünstigste Monat:
 
-<figure>
-  <PricesPerMonthChart data={priceData2023} months={[0, 1, 2, 3, 4, 5, 6, 7]} />
-  <figcaption>Durchschnittlicher Nettostrompreis pro Monat 2023</figcaption>
-</figure>
+<PricesPerMonthChart
+  data={priceData2023}
+  months={[0, 1, 2, 3, 4, 5, 6, 7]}
+  caption={"Durchschnittlicher Nettostrompreis pro Monat 2023"}
+/>
 
 Im Vergleich zum Juli gab es weit weniger Schwankungen.
 Die Standardweichung sank von {Math.sqrt(priceDataJul23.map(x => Math.pow(x.price - meanJuly, 2)).reduce((total, next) => total + next) / priceDataJul23.length).toFixed(1)} ct/kWh auf {Math.sqrt(priceDataAug23.map(x => Math.pow(x.price - mean, 2)).reduce((total, next) => total + next) / priceDataAug23.length).toFixed(1)} ct/kWh.
 Im nachfolgenden Diagramm ist der Strompreis pro Stunde und pro Tag im August dargestellt:
 
-<figure>
-  <PricesPerDayChart data={priceDataAug23} />
-  <figcaption>Nettostrompreise im August 2023</figcaption>
-</figure>
+<PricesPerDayChart data={priceDataAug23} caption={"Nettostrompreise im August 2023"} />
 
 Während der höchste Preis im Juli bei {Math.max(...priceDataJul23.map((o) => o.price)).toFixed(1)} ct/kWh lag, lag er im August beträchtlich höher bei:
 
@@ -74,10 +72,7 @@ export const sundayPriceData = priceDataAug23.filter((item) => new Date(item.dat
 
 Wie bereits im Juli war der durchschnittliche Strompreis an Sonntagen mit {(sundayPriceData.reduce((total, next) => total + next.price, 0) / sundayPriceData.length).toFixed(1)} ct/kWh geringer als an allen anderen Wochentagen.
 
-<figure>
-  <PricesPerWeekdayChart data={priceDataAug23} />
-  <figcaption>Nettostrompreise im August in Wochentage gruppiert</figcaption>
-</figure>
+<PricesPerWeekdayChart data={priceDataAug23} caption={"Nettostrompreise im August in Wochentage gruppiert"} />
 
 export const twoPmPriceData = priceDataAug23.filter((item) => new Date(item.dateTime).getHours() === 14);
 export const eightPmPriceData = priceDataAug23.filter((item) => new Date(item.dateTime).getHours() === 20);
@@ -95,10 +90,7 @@ Der durchschnittlich höchste Preis herrschte zwischen 20 und 21 Uhr und mit {(e
   <b>Tipp 2: 14 Uhr Spülmaschine einschalten</b>
 </p>
 
-<figure>
-  <PricesPerHourChart data={priceDataAug23} />
-  <figcaption>Nettostrompreise im August in Tageszeit gruppiert</figcaption>
-</figure>
+<PricesPerHourChart data={priceDataAug23} caption={"Nettostrompreise im August in Tageszeit gruppiert"} />
 
 Die Muster aus dem Juli haben sich somit auch im August wiederholt - wenn auch weniger intensiv.
 In den kommenden Monaten werden wir prüfen, ob diese Muster und Verhaltensratschläge sich auch auf andere Monate übertragen lassen.

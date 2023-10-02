@@ -1,7 +1,8 @@
 import React from "react";
 import { ResponsiveBar } from "@nivo/bar";
+import { containerClass, captionClass } from "./charts.module.css";
 
-const PricesPerMonthChart = ({ data, months }) => {
+const PricesPerMonthChart = ({ data, months, caption }) => {
   const avgPricesPerMonth = months.map((month) => {
     const priceDataOfThisMonth = data.filter((item) => new Date(item.dateTime).getMonth() == month);
     const sum = priceDataOfThisMonth.reduce((accumulator, curr) => accumulator + curr.price, 0);
@@ -21,7 +22,7 @@ const PricesPerMonthChart = ({ data, months }) => {
   }).avgPrice;
 
   return (
-    <div style={{ height: 400 }} data-testid="PricesPerMonthChart">
+    <div className={containerClass} data-testid="PricesPerMonthChart">
       <ResponsiveBar
         data={avgPricesPerMonth}
         indexBy="month"
@@ -34,8 +35,9 @@ const PricesPerMonthChart = ({ data, months }) => {
         axisBottom={{
           format: (value) => `2023-${Number(value) + 1}`,
         }}
-        margin={{ top: 20, right: 50, bottom: 50, left: 80 }}
+        margin={{ top: 20, right: 50, bottom: 30, left: 80 }}
       />
+      <figcaption className={captionClass}>{caption}</figcaption>
     </div>
   );
 };

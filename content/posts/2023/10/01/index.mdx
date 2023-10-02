@@ -39,10 +39,11 @@ Der durchschnittliche Strompreis lag im September bei:
 
 Damit lag der September im diesjährigen Vergleich in etwa im Mittel:
 
-<figure>
-  <PricesPerMonthChart data={priceData2023} months={[0, 1, 2, 3, 4, 5, 6, 7, 8]} />
-  <figcaption>Durchschnittlicher Nettostrompreis pro Monat 2023</figcaption>
-</figure>
+<PricesPerMonthChart
+  data={priceData2023}
+  months={[0, 1, 2, 3, 4, 5, 6, 7, 8]}
+  caption={"Durchschnittlicher Nettostrompreis pro Monat 2023"}
+/>
 
 Die Preisschwankungen im September waren ähnlich wie im August.
 Jedoch gab es einen kurzzeitigen, krätigen Ausschlag nach oben.
@@ -53,10 +54,7 @@ Insgesamt gab es im September, wie schon im August, an {priceDataSep23.filter((i
 Das sind {(priceDataSep23.filter((item) => item.price<0).length/24.0/30.0).toFixed(2)}% der Gesamtstunden.
 {priceDataSep23.filter((item) => item.price<0 && new Date(item.dateTime).getHours() >= 12 && new Date(item.dateTime).getHours() <= 15).length} der {priceDataSep23.filter((item) => item.price<0).length} Stunden mit negativen Preisen lagen zwischen 12 und 15 Uhr.
 
-<figure>
-  <PricesPerDayChart data={priceDataSep23} />
-  <figcaption>Nettostrompreise im September 2023</figcaption>
-</figure>
+<PricesPerDayChart data={priceDataSep23} caption={"Nettostrompreise im September 2023"} />
 
 export const sundayPriceData = priceDataSep23.filter((item) => new Date(item.dateTime).getDay() === SUNDAY);
 
@@ -67,10 +65,7 @@ Daher war es wieder vorteilhaft, Verbraucher, die man nicht täglich benötigt, 
   <b>Tipp: Sonntags Waschen</b>
 </p>
 
-<figure>
-  <PricesPerWeekdayChart data={priceDataSep23} />
-  <figcaption>Nettostrompreise im September in Wochentage gruppiert</figcaption>
-</figure>
+<PricesPerWeekdayChart data={priceDataSep23} caption={"Nettostrompreise im September in Wochentage gruppiert"} />
 
 export const sevenPmPriceData = priceDataSep23.filter((item) => new Date(item.dateTime).getHours() === 19);
 
@@ -83,15 +78,9 @@ Zu dieser Zeit betrug der Strompreis im Durchschnitt {(sevenPmPriceData.reduce((
 
 Nachfolgend sind die Nettostrompreise je Tageszeit im August und September zum direkten Vergleich dargestellt:
 
-<figure>
-  <PricesPerHourChart data={priceDataAug23} />
-  <figcaption>Nettostrompreise im August in Tageszeit gruppiert</figcaption>
-</figure>
+<PricesPerHourChart data={priceDataAug23} caption={"Nettostrompreise im August in Tageszeit gruppiert"} />
 
-<figure>
-  <PricesPerHourChart data={priceDataSep23} />
-  <figcaption>Nettostrompreise im September in Tageszeit gruppiert</figcaption>
-</figure>
+<PricesPerHourChart data={priceDataSep23} caption={"Nettostrompreise im September in Tageszeit gruppiert"} />
 
 export const onePmPriceData = priceDataSep23.filter((item) => new Date(item.dateTime).getHours() === 13);
 

@@ -1,5 +1,6 @@
 import React from "react";
 import { ResponsiveLine } from "@nivo/line";
+import { containerClass, captionClass } from "./charts.module.css";
 
 function getLineChartData(priceData) {
   const pricesThisMonth = priceData.map((item) => {
@@ -36,12 +37,12 @@ function getAvgPricePerDay(pricesThisMonth) {
   return avgPricesPerDay;
 }
 
-const PricesPerDayChart = ({ data }) => {
+const PricesPerDayChart = ({ data, caption }) => {
   return (
-    <div style={{ height: 400 }} data-testid="PricesPerDayChart">
+    <div className={containerClass} data-testid="PricesPerDayChart">
       <ResponsiveLine
         data={getLineChartData(data)}
-        margin={{ top: 20, right: 50, bottom: 50, left: 80 }}
+        margin={{ top: 20, right: 50, bottom: 30, left: 80 }}
         useMesh={true}
         enableGridX={false}
         enablePoints={false}
@@ -91,6 +92,7 @@ const PricesPerDayChart = ({ data }) => {
           },
         }}
       />
+      <figcaption className={captionClass}>{caption}</figcaption>
     </div>
   );
 };

@@ -1,7 +1,8 @@
 import React from "react";
 import { ResponsiveBar } from "@nivo/bar";
+import { containerClass, captionClass } from "./charts.module.css";
 
-const PricesPerHourChart = ({ data }) => {
+const PricesPerHourChart = ({ data, caption }) => {
   const hours = Array(24)
     .fill()
     .map((x, i) => i);
@@ -23,7 +24,7 @@ const PricesPerHourChart = ({ data }) => {
     return min < v.averagePrice ? min : v.averagePrice;
   });
   return (
-    <div style={{ height: 400 }} data-testid="PricesPerHourChart">
+    <div className={containerClass} data-testid="PricesPerHourChart">
       <ResponsiveBar
         data={avgPricesPerHour}
         indexBy="hour"
@@ -36,8 +37,9 @@ const PricesPerHourChart = ({ data }) => {
         axisBottom={{
           format: (value) => `${value}-${Number(value) + 1}`,
         }}
-        margin={{ top: 20, right: 50, bottom: 50, left: 80 }}
+        margin={{ top: 20, right: 50, bottom: 30, left: 80 }}
       />
+      <figcaption className={captionClass}>{caption}</figcaption>
     </div>
   );
 };

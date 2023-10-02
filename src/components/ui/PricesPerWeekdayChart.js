@@ -1,8 +1,10 @@
 import React from "react";
 import { ResponsiveBar } from "@nivo/bar";
+import { containerClass, captionClass } from "./charts.module.css";
+
 const ANYSUNDAY = new Date("2023-08-13");
 
-const PricesPerWeekdayChart = ({ data }) => {
+const PricesPerWeekdayChart = ({ data, caption }) => {
   const weekdays = [1, 2, 3, 4, 5, 6, 0];
   const avgPricesPerWeekday = weekdays.map((weekday) => {
     const priceDataOfThisWeekday = data.filter((item) => new Date(item.dateTime).getDay() === weekday);
@@ -29,7 +31,7 @@ const PricesPerWeekdayChart = ({ data }) => {
   }).avgPrice;
 
   return (
-    <div style={{ height: 400 }} data-testid="PricesPerWeekdayChart">
+    <div className={containerClass} data-testid="PricesPerWeekdayChart">
       <ResponsiveBar
         data={avgPricesPerWeekday}
         indexBy="weekday"
@@ -42,8 +44,9 @@ const PricesPerWeekdayChart = ({ data }) => {
         axisBottom={{
           format: (value) => getAnyDateForThisWeekday(value).toLocaleString(undefined, { weekday: "long" }),
         }}
-        margin={{ top: 20, right: 50, bottom: 50, left: 80 }}
+        margin={{ top: 20, right: 50, bottom: 30, left: 80 }}
       />
+      <figcaption className={captionClass}>{caption}</figcaption>
     </div>
   );
 };
