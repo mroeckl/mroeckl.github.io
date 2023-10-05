@@ -5,7 +5,7 @@ const CORS_PROXY_URL = "https://corsproxy.io/";
 const MASTR_URL =
   "https://www.marktstammdatenregister.de/MaStR/Einheit/EinheitJson/GetErweiterteOeffentlicheEinheitStromerzeugung";
 const INBETRIEBNAMEDATUM = "Inbetriebnahmedatum%20der%20Einheit";
-const BALKONSOLARFILTER = "Nettonennleistung%20der%20Einheit~lt~'0.601'";
+const BALKONSOLARFILTER = "Lage%20der%20Einheit~eq~'2961'";
 
 const BalconysolarStats = () => {
   let [jsonData, setJsonData] = useState(null);
@@ -74,7 +74,7 @@ const BalconysolarStats = () => {
       <div data-testid="BalconysolarStats" style={{ height: 400, marginBottom: 100 }}>
         <div style={{ textAlign: "center", marginBottom: 20 }}>
           <em>
-            <strong>Registrierte Solaranlagen mit einer Nettonennleistung &lt;= 600 W in der Gemeinde</strong>
+            <strong>Registrierte Balkonkraftwerke in der Gemeinde</strong>
           </em>
         </div>
         Gemeinde: <input placeholder="Ganz Deutschland" type="text" onChange={handleChange} />
