@@ -8,8 +8,9 @@ const INBETRIEBNAMEDATUM = "Inbetriebnahmedatum%20der%20Einheit";
 const BALKONSOLARFILTER = "Lage%20der%20Einheit~eq~'2961'";
 
 const BalconysolarStats = () => {
-  let [jsonData, setJsonData] = useState(null);
+  const [jsonData, setJsonData] = useState(null);
   const [timer, setTimer] = useState(null);
+  const [gemeinde, setGemeinde] = useState("Ganz Deutschland");
 
   const getJsonData = async (gemeinde) => {
     try {
@@ -64,6 +65,7 @@ const BalconysolarStats = () => {
       getJsonData(event.target.value).then((data) => {
         setJsonData(data);
       });
+      setGemeinde(event.target.value);
     }, 1000);
 
     setTimer(newTimer);
@@ -74,7 +76,7 @@ const BalconysolarStats = () => {
       <div data-testid="BalconysolarStats" style={{ height: 400, marginBottom: 100 }}>
         <div style={{ textAlign: "center", marginBottom: 20 }}>
           <em>
-            <strong>Registrierte Balkonkraftwerke in der Gemeinde</strong>
+            <strong>Registrierte Balkonkraftwerke in {gemeinde !== "" && <span>{gemeinde}</span>}</strong>
           </em>
         </div>
         Gemeinde: <input placeholder="Ganz Deutschland" type="text" onChange={handleChange} />
