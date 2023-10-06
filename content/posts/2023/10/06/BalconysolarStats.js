@@ -10,7 +10,7 @@ const BALKONSOLARFILTER = "Lage%20der%20Einheit~eq~'2961'";
 const BalconysolarStats = () => {
   const [jsonData, setJsonData] = useState(null);
   const [timer, setTimer] = useState(null);
-  const [gemeinde, setGemeinde] = useState("Ganz Deutschland");
+  const [gemeinde, setGemeinde] = useState("Deutschland");
 
   const getJsonData = async (gemeinde) => {
     try {
@@ -65,7 +65,7 @@ const BalconysolarStats = () => {
       getJsonData(event.target.value).then((data) => {
         setJsonData(data);
       });
-      setGemeinde(event.target.value);
+      setGemeinde(event.target.value ? event.target.value : "Deutschland");
     }, 1000);
 
     setTimer(newTimer);
@@ -82,8 +82,9 @@ const BalconysolarStats = () => {
         Gemeinde: <input placeholder="Ganz Deutschland" type="text" onChange={handleChange} />
         <ResponsiveBar
           data={jsonData}
-          margin={{ top: 20, right: 50, bottom: 20, left: 50 }}
+          margin={{ top: 20, right: 50, bottom: 30, left: 60 }}
           colors={{ scheme: "paired" }}
+          theme={{ fontSize: "14px" }}
           colorBy="indexValue"
           keys={["Total"]}
           indexBy="year"
