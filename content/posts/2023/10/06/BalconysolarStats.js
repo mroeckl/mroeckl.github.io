@@ -6,8 +6,8 @@ const CORS_PROXY_URL = "https://corsproxy.io/";
 const MASTR_GEN_URL =
   "https://www.marktstammdatenregister.de/MaStR/Einheit/EinheitJson/GetErweiterteOeffentlicheEinheitStromerzeugung";
 const MASTR_SUM_URL = "https://www.marktstammdatenregister.de/MaStR/Einheit/EinheitJson/GetSummenDerLeistungswerte";
-const INBETRIEBNAMEDATUM = "Inbetriebnahmedatum%20der%20Einheit";
-const BALKONSOLARFILTER = "Lage%20der%20Einheit~eq~'2961'";
+const INBETRIEBNAMEDATUM = "Betriebs-Status~eq~'35'~and~Inbetriebnahmedatum%20der%20Einheit";
+const BALKONSOLARFILTER = "Lage%20der%20Einheit~eq~'2961'~and~Nettonennleistung%20der%20Einheit~lt~'0.61'";
 
 const keys = ["Registrierungen", "Wechselrichterleistung", "Modulleistung"];
 
@@ -119,7 +119,7 @@ const BalconysolarStats = () => {
         ))}
         <ResponsiveBar
           data={jsonData}
-          margin={{ top: 20, right: 50, bottom: 80, left: 60 }}
+          margin={{ top: 20, right: 50, bottom: 100, left: 60 }}
           colors={{ scheme: "paired" }}
           theme={{ fontSize: "14px" }}
           label={(d) =>
