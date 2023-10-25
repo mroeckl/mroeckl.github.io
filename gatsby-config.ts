@@ -35,6 +35,10 @@ const config: GatsbyConfig = {
         ],
         externalLinks: [
           {
+            name: `Bluesky`,
+            url: `https://bsky.app/profile/mroeckl.bsky.social`,
+          },
+          {
             name: `Twitter`,
             url: `https://twitter.com/MatthiasMroeckl`,
           },
