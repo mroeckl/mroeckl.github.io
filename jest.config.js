@@ -7,9 +7,10 @@ module.exports = {
   moduleNameMapper: {
     ".+\\.(css|styl|less|sass|scss)$": `identity-obj-proxy`,
     ".+\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": `<rootDir>/tests/__mocks__/file-mock.js`,
+    "^d3-(interpolate|scale-chromatic|color)$": `<rootDir>/node_modules/d3-$1/dist/d3-$1.min.js`,
   },
   testPathIgnorePatterns: [`node_modules`, `\\.cache`, `<rootDir>.*/public`],
-  transformIgnorePatterns: [`node_modules/(?!(gatsby|gatsby-script|gatsby-link|@lekoarts|@mdx-js|d3-color)/)`],
+  transformIgnorePatterns: [`node_modules/(?!(gatsby|gatsby-script|gatsby-link|@lekoarts|@mdx-js)/)`],
   globals: {
     __PATH_PREFIX__: ``,
   },
