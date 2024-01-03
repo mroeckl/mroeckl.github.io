@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { ResponsiveBar } from "@nivo/bar";
 import { containerClass, checkboxClass, locClass, captionClass } from "./BalconysolarStats.module.css";
 
-const CORS_PROXY_URL = "https://api.allorigins.win/raw?url=";
+const CORS_PROXY_URL = "https://api.codetabs.com/v1/proxy?quest=";
 const MASTR_GEN_URL =
   "https://www.marktstammdatenregister.de/MaStR/Einheit/EinheitJson/GetErweiterteOeffentlicheEinheitStromerzeugung";
 const MASTR_SUM_URL = "https://www.marktstammdatenregister.de/MaStR/Einheit/EinheitJson/GetSummenDerLeistungswerte";
