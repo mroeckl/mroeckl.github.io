@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { ResponsiveBar } from "@nivo/bar";
 import { containerClass, checkboxClass, locClass, captionClass } from "./BalconysolarStats.module.css";
 
-const CORS_PROXY_URL = "https://corsproxy.io/";
+const CORS_PROXY_URL = "https://thingproxy.freeboard.io/fetch/";
 const MASTR_GEN_URL =
   "https://www.marktstammdatenregister.de/MaStR/Einheit/EinheitJson/GetErweiterteOeffentlicheEinheitStromerzeugung";
 const MASTR_SUM_URL = "https://www.marktstammdatenregister.de/MaStR/Einheit/EinheitJson/GetSummenDerLeistungswerte";
@@ -50,11 +50,11 @@ const BalconysolarStats = () => {
       const json = responses.map((response) => response.json());
       const data = await Promise.all(json);
 
-      const prepData = new Array(3);
+      const prepData = new Array(4);
 
-      for (let i = 0; i <= 2; i++) {
+      for (let i = 0; i <= 3; i++) {
         prepData[i] = {};
-        prepData[i].year = 2021 + i;
+        prepData[i].year = i === 3 ? "heute" : "31.12." + (2021 + i);
         prepData[i].Registrierungen = data[i * 2].Total;
         prepData[i].Wechselrichterleistung = Math.round(data[i * 2 + 1].nettoleistungSumme);
         prepData[i].Modulleistung = Math.round(data[i * 2 + 1].bruttoleistungSumme);
@@ -69,12 +69,18 @@ const BalconysolarStats = () => {
   const getUrls = (gemeinde) => {
     const gemeindeFilter = gemeinde ? `Gemeinde~eq~'${gemeinde}'~and~` : "";
     const urls = [];
-    for (let year = 2021; year <= 2023; year++) {
+    for (let year = 2021; year <= 2024; year++) {
       urls.push(
-        `${CORS_PROXY_URL}?${MASTR_GEN_URL}?pageSize=0&filter=${gemeindeFilter}${BALKONSOLARFILTER}~and~${INBETRIEBNAMEDATUM}~lt~'31.12.${year}'`,
+        CORS_PROXY_URL +
+          encodeURIComponent(
+            `${MASTR_GEN_URL}?pageSize=0&filter=${gemeindeFilter}${BALKONSOLARFILTER}~and~${INBETRIEBNAMEDATUM}~lt~'31.12.${year}'`,
+          ),
       );
       urls.push(
-        `${CORS_PROXY_URL}?${MASTR_SUM_URL}?gridName=extSEE&filter=${gemeindeFilter}${BALKONSOLARFILTER}~and~${INBETRIEBNAMEDATUM}~lt~'31.12.${year}'`,
+        CORS_PROXY_URL +
+          encodeURIComponent(
+            `${MASTR_SUM_URL}?gridName=extSEE&filter=${gemeindeFilter}${BALKONSOLARFILTER}~and~${INBETRIEBNAMEDATUM}~lt~'31.12.${year}'`,
+          ),
       );
     }
     return urls;
