@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { ResponsiveBar } from "@nivo/bar";
 import { containerClass, checkboxClass, locClass, captionClass } from "./BalconysolarStats.module.css";
 
-const CORS_PROXY_URL = "https://api.codetabs.com/v1/proxy?quest=";
+const CORS_PROXY_URL = "https://corsproxy.io/?"; //"https://api.codetabs.com/v1/proxy?quest=";
 const MASTR_GEN_URL =
   "https://www.marktstammdatenregister.de/MaStR/Einheit/EinheitJson/GetErweiterteOeffentlicheEinheitStromerzeugung";
 const MASTR_SUM_URL = "https://www.marktstammdatenregister.de/MaStR/Einheit/EinheitJson/GetSummenDerLeistungswerte";
@@ -113,7 +113,7 @@ const BalconysolarStats = () => {
     setEnabledKeys(newEnabledKeys);
   };
 
-  if (jsonData !== null) {
+  if (jsonData != null) {
     return (
       <div data-testid="BalconysolarStats" className={containerClass}>
         <div className={captionClass}>
@@ -150,6 +150,8 @@ const BalconysolarStats = () => {
         />
       </div>
     );
+  } else {
+    return <div>Leider ist ein Fehler beim Laden der Daten aufgetreten :-(</div>;
   }
 };
 export default BalconysolarStats;
