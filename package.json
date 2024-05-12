@@ -22,9 +22,9 @@
   },
   "dependencies": {
     "@lekoarts/gatsby-theme-minimal-blog": "^6.0.5",
-    "@nivo/bar": "^0.85.0",
-    "@nivo/core": "^0.85.0",
-    "@nivo/line": "^0.85.0",
+    "@nivo/bar": "^0.87.0",
+    "@nivo/core": "^0.87.0",
+    "@nivo/line": "^0.87.0",
     "gatsby": "^5.5.0",
     "gatsby-plugin-feed": "^5.5.0",
     "gatsby-plugin-google-gtag": "^5.13.1",
