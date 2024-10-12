@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { ResponsiveBar } from "@nivo/bar";
 import { containerClass, checkboxClass, locClass, captionClass } from "./SolarStats.module.css";
 
-const CORS_PROXY_URL = "https://universal-cors-proxy.glitch.me/"; //"http://api.codetabs.com/v1/proxy?quest="; //"https://corsproxy.io/?";
+const CORS_PROXY_URL = "https://cloudflare-cors-anywhere.mroeckl.workers.dev/?";
 const MASTR_GEN_URL =
   "https://www.marktstammdatenregister.de/MaStR/Einheit/EinheitJson/GetErweiterteOeffentlicheEinheitStromerzeugung";
 const MASTR_SUM_URL = "https://www.marktstammdatenregister.de/MaStR/Einheit/EinheitJson/GetSummenDerLeistungswerte";
@@ -43,7 +43,6 @@ const SolarStats = () => {
 
       const requests = urls.map((url) => fetch(url));
       const responses = await Promise.all(requests);
-
       const errors = responses.filter((response) => !response.ok);
 
       if (errors.length > 0) {
