@@ -156,7 +156,7 @@ const SolarStats = () => {
       </div>
     );
   } else {
-    return <div>Leider ist ein Fehler beim Laden der Daten aufgetreten :-(</div>;
+    return <div>Daten vom Marktstammdatenregister werden geladen!</div>;
   }
 };
 export default SolarStats;

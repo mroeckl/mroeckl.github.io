@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import { ResponsiveBar } from "@nivo/bar";
 import { containerClass, checkboxClass, locClass, captionClass } from "./BalconysolarStats.module.css";
 
-const CORS_PROXY_URL = "https://corsproxy.io/?"; //"https://api.codetabs.com/v1/proxy?quest=";
+const CORS_PROXY_URL = "https://cloudflare-cors-anywhere.mroeckl.workers.dev/?";
 const MASTR_GEN_URL =
   "https://www.marktstammdatenregister.de/MaStR/Einheit/EinheitJson/GetErweiterteOeffentlicheEinheitStromerzeugung";
 const MASTR_SUM_URL = "https://www.marktstammdatenregister.de/MaStR/Einheit/EinheitJson/GetSummenDerLeistungswerte";
 const INBETRIEBNAMEDATUM = "Betriebs-Status~eq~'35'~and~Inbetriebnahmedatum%20der%20Einheit";
-const BALKONSOLARFILTER = "Lage%20der%20Einheit~eq~'2961'~and~Nettonennleistung%20der%20Einheit~lt~'0.601'";
+const BALKONSOLARFILTER = "Lage%20der%20Einheit~eq~'2961'~and~Nettonennleistung%20der%20Einheit~lt~'0.801'";
 
 const keys = ["Registrierungen", "Wechselrichterleistung", "Modulleistung"];
 
@@ -30,6 +30,7 @@ const LocInput = ({ id, label, placeholder, type = "text", onChange }) => {
 };
 
 const BalconysolarStats = () => {
+  const [loading, setLoading] = useState(true);
   const [jsonData, setJsonData] = useState(null);
   const [timer, setTimer] = useState(null);
   const [gemeinde, setGemeinde] = useState("Deutschland");
@@ -37,6 +38,7 @@ const BalconysolarStats = () => {
 
   const getJsonData = async (gemeinde) => {
     try {
+      setLoading(true);
       const urls = getUrls(gemeinde);
 
       const requests = urls.map((url) => fetch(url));
@@ -50,11 +52,11 @@ const BalconysolarStats = () => {
       const json = responses.map((response) => response.json());
       const data = await Promise.all(json);
 
-      const prepData = new Array(4);
+      const prepData = new Array(3);
 
-      for (let i = 0; i <= 3; i++) {
+      for (let i = 0; i <= 2; i++) {
         prepData[i] = {};
-        prepData[i].year = i === 3 ? "heute" : "31.12." + (2021 + i);
+        prepData[i].year = i === 3 ? "heute" : "31.12." + (2022 + i);
         prepData[i].Registrierungen = data[i * 2].Total;
         prepData[i].Wechselrichterleistung = Math.round(data[i * 2 + 1].nettoleistungSumme);
         prepData[i].Modulleistung = Math.round(data[i * 2 + 1].bruttoleistungSumme);
@@ -63,13 +65,15 @@ const BalconysolarStats = () => {
       return prepData;
     } catch (errors) {
       console.error(errors);
+    } finally {
+      setLoading(false);
     }
   };
 
   const getUrls = (gemeinde) => {
     const gemeindeFilter = gemeinde ? `Gemeinde~eq~'${gemeinde}'~and~` : "";
     const urls = [];
-    for (let year = 2021; year <= 2024; year++) {
+    for (let year = 2022; year <= 2024; year++) {
       urls.push(
         CORS_PROXY_URL +
           encodeURIComponent(
@@ -120,6 +124,7 @@ const BalconysolarStats = () => {
           Registrierte Balkonkraftwerke in {gemeinde !== "" && <span>{gemeinde}</span>}
         </div>
         <LocInput id="gemeinde" label="Gemeinde" placeholder="Ganz Deutschland" onChange={handleLocationChange} />
+        {loading ? <i>Loading...</i> : null}
         {keys.map((item) => (
           <Checkbox key={item} name={item} checked={enabledKeys.includes(item)} onChange={handleEnabledKeysChange} />
         ))}
@@ -151,7 +156,7 @@ const BalconysolarStats = () => {
       </div>
     );
   } else {
-    return <div>Leider ist ein Fehler beim Laden der Daten aufgetreten :-(</div>;
+    return <div>Daten vom Marktstammdatenregister werden geladen!</div>;
   }
 };
 export default BalconysolarStats;
