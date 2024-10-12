@@ -56,7 +56,7 @@ const BalconysolarStats = () => {
 
       for (let i = 0; i <= 2; i++) {
         prepData[i] = {};
-        prepData[i].year = i === 3 ? "heute" : "31.12." + (2022 + i);
+        prepData[i].year = i === 2 ? "heute" : "31.12." + (2022 + i);
         prepData[i].Registrierungen = data[i * 2].Total;
         prepData[i].Wechselrichterleistung = Math.round(data[i * 2 + 1].nettoleistungSumme);
         prepData[i].Modulleistung = Math.round(data[i * 2 + 1].bruttoleistungSumme);
