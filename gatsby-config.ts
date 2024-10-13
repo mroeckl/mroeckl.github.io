@@ -43,6 +43,10 @@ const config: GatsbyConfig = {
             url: `https://twitter.com/MatthiasMroeckl`,
           },
           {
+            name: `Thingiverse`,
+            url: `https://www.thingiverse.com/matthiasr`,
+          },
+          {
             name: `Instagram`,
             url: `https://www.instagram.com/wood2art/`,
           },
