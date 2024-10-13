@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { ResponsiveBar } from "@nivo/bar";
 import { containerClass, checkboxClass, locClass, captionClass } from "./SolarStats.module.css";
+import loadingImg from "./loading.gif";
 
 const CORS_PROXY_URL = "https://cloudflare-cors-anywhere.mroeckl.workers.dev/?";
 const MASTR_GEN_URL =
@@ -124,7 +125,7 @@ const SolarStats = () => {
           Registrierte PV-Anlagen auf Gebäuden in {gemeinde !== "" && <span>{gemeinde}</span>}
         </div>
         <LocInput id="gemeinde" label="Gemeinde" placeholder="Ganz Deutschland" onChange={handleLocationChange} />
-        {loading ? <i>Loading...</i> : null}
+        {loading ? <img src={loadingImg} width={16} height={16}></img> : null}
         {keys.map((item) => (
           <Checkbox key={item} name={item} checked={enabledKeys.includes(item)} onChange={handleEnabledKeysChange} />
         ))}
