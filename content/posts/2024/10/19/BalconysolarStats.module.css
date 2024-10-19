@@ -1,0 +1,20 @@
+.containerClass {
+    height: 600px;
+    margin-top: 40px;
+    margin-bottom: 100px
+}
+
+.checkboxClass {
+    margin-left: 10px;
+    white-space: nowrap;
+}
+
+.locClass {
+    margin-right: 40px;
+}
+
+.captionClass {
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
