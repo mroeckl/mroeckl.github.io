@@ -132,7 +132,7 @@ const BalconysolarStats = () => {
         <ResponsiveBar
           data={jsonData}
           margin={{ top: 20, right: 50, bottom: 100, left: 60 }}
-          colors={{ scheme: "paired" }}
+          colors={{ scheme: "pastel1" }}
           theme={{ fontSize: "14px" }}
           label={(d) =>
             `${d.value}` + (d.id === "Registrierungen" ? "" : " kW") + (d.id === "Modulleistung" ? "p" : "")
