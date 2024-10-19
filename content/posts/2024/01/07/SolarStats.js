@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useColorMode } from "theme-ui";
 import { ResponsiveBar } from "@nivo/bar";
 import { containerClass, checkboxClass, locClass, captionClass } from "./SolarStats.module.css";
 import loadingImg from "./loading.gif";
@@ -118,6 +119,9 @@ const SolarStats = () => {
     setEnabledKeys(newEnabledKeys);
   };
 
+  const [colorMode, setColorMode] = useColorMode();
+  const textColor = colorMode === "dark" ? "white" : "black";
+
   if (jsonData != null) {
     return (
       <div data-testid="BalconysolarStats" className={containerClass}>
@@ -132,8 +136,8 @@ const SolarStats = () => {
         <ResponsiveBar
           data={jsonData}
           margin={{ top: 20, right: 50, bottom: 100, left: 60 }}
-          colors={{ scheme: "pastel1" }}
-          theme={{ fontSize: "14px" }}
+          colors={{ scheme: "set2" }}
+          theme={{ fontSize: "14px", text: { fill: textColor } }}
           label={(d) =>
             `${d.value}` + (d.id === "Registrierungen" ? "" : " kW") + (d.id === "Modulleistung" ? "p" : "")
           }
