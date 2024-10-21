@@ -85,14 +85,14 @@ Genutzt würde sie, wenn entweder:
 Stellt sich die Frage, woher die unterschiedlichen Volumenströme kommen.
 Dazu muss man die Regelung der Kreise etwas genauer betrachten.
 Im Primärkreis wird als Zielgröße die Temperaturdifferenz _dT_ zwischen Vor- und Rücklauf, die so genannte Spreizung, eingestellt.
-Das Erreichen der Spreizung wird über den Volumenstrom geregelt.
-Ist die Spreizung zu niedrig, wird der Volumenstrom erhöht.
-Ist sie zu hoch, wird der Volumenstrom reduziert.
+Das Erreichen der Spreizung wird über den Volumenstrom der drehzahlgesteuerten Pumpe (PC0) geregelt.
+Ist die Spreizung zu niedrig, reduziert PC0 den Volumenstrom, damit das Wasser im Verflüssiger mehr Wärme aufnehmen kann und die Spreizung steigt.
+Ist die Spreizung zu hoch, erhöht PC0 den Volumenstrom.
 
 Im Heizkreis hingegen wird der Differenzdruck eingestellt und die Spreizung ergibt sich aus der Wärmeabnahme der Heizkörper bzw. Fußbodenheizung.
 Bei gleichbleibendem Differenzdruck nimmt das Haus immer gleich viel Energie ab und die Spreizung bleibt auf nahezu dem selben Wert.
 Leichte Veränderungen ergeben sich bei niedrigerer Außentemperatur durch die steigende Vorlauftemperatur.
-Dies Veränderung kann aber vernachlässigt werden.
+Diese Veränderung kann aber vernachlässigt werden.
 
 Standardmäßig ist bei der Bosch CS 6800i AW die Spreizung des Primärkreises auf 4,5K bei Fußbodenheizung und 7,5K bei Heizkörpern und ein Differenzdruck von 250 mbar hinterlegt.
 
@@ -125,6 +125,10 @@ Durch den erhöhten Druck steigt die Temperatur des Kältemittels.
 ## Effizienz
 
 In den nächsten Monaten werden wir uns die Effizienz der Wärmepumpe etwas genauer anschauen und den Blog-Post entsprechend erweitern.
+
+import Heatpump from "./Heatpump";
+
+<Heatpump />
 
 
 ---
