@@ -6,7 +6,7 @@ import { containerClass } from "./BalconysolarStats.module.css";
 const CORS_PROXY_URL = "https://cloudflare-cors-anywhere.mroeckl.workers.dev/?";
 const MASTR_GEN_URL =
   "https://www.marktstammdatenregister.de/MaStR/Einheit/EinheitJson/GetErweiterteOeffentlicheEinheitStromerzeugung";
-const BALKONSOLARFILTER = "Lage%20der%20Einheit~eq~'2961'~and~Nettonennleistung%20der%20Einheit~lt~'0.801'";
+const BALKONSOLARFILTER = "Art%20der%20Solaranlage~eq~'2961'~and~Nettonennleistung%20der%20Einheit~lt~'0.801'";
 const STATUS_IN_BETRIEB = "Betriebs-Status~eq~'35'";
 
 const states = [
@@ -84,7 +84,7 @@ const BalconysolarGeoStats = () => {
           features={geoFeatures.features}
           margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
           colors="greens"
-          domain={[8, 26]}
+          domain={[8, 40]}
           label="properties.name"
           value="totalPer1000"
           valueFormat=".2s"
