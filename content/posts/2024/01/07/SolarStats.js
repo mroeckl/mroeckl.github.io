@@ -9,7 +9,7 @@ const MASTR_GEN_URL =
   "https://www.marktstammdatenregister.de/MaStR/Einheit/EinheitJson/GetErweiterteOeffentlicheEinheitStromerzeugung";
 const MASTR_SUM_URL = "https://www.marktstammdatenregister.de/MaStR/Einheit/EinheitJson/GetSummenDerLeistungswerte";
 const INBETRIEBNAMEDATUM = "Betriebs-Status~eq~'35'~and~Inbetriebnahmedatum%20der%20Einheit";
-const SOLARFILTER = "Lage%20der%20Einheit~eq~'853,2961'";
+const SOLARFILTER = "Art%20der%20Solaranlage~eq~'853,2961'";
 
 const keys = ["Registrierungen", "Wechselrichterleistung", "Modulleistung"];
 
@@ -56,9 +56,9 @@ const SolarStats = () => {
 
       const prepData = new Array(3);
 
-      for (let i = 0; i <= 2; i++) {
+      for (let i = 0; i <= 3; i++) {
         prepData[i] = {};
-        prepData[i].year = i === 2 ? "heute" : "31.12." + (2022 + i);
+        prepData[i].year = i === 3 ? "heute" : "31.12." + (2022 + i);
         prepData[i].Registrierungen = data[i * 2].Total;
         prepData[i].Wechselrichterleistung = Math.round(data[i * 2 + 1].nettoleistungSumme);
         prepData[i].Modulleistung = Math.round(data[i * 2 + 1].bruttoleistungSumme);
@@ -75,7 +75,7 @@ const SolarStats = () => {
   const getUrls = (gemeinde) => {
     const gemeindeFilter = gemeinde ? `Gemeinde~eq~'${gemeinde}'~and~` : "";
     const urls = [];
-    for (let year = 2022; year <= 2024; year++) {
+    for (let year = 2022; year <= 2025; year++) {
       urls.push(
         CORS_PROXY_URL +
           encodeURIComponent(
@@ -139,7 +139,9 @@ const SolarStats = () => {
           colors={{ scheme: "set2" }}
           theme={{ fontSize: "14px", text: { fill: textColor } }}
           label={(d) =>
-            `${d.value}` + (d.id === "Registrierungen" ? "" : " kW") + (d.id === "Modulleistung" ? "p" : "")
+            `${d.value.toLocaleString()}` +
+            (d.id === "Registrierungen" ? "" : " kW") +
+            (d.id === "Modulleistung" ? "p" : "")
           }
           groupMode="grouped"
           keys={enabledKeys}
